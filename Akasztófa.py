@@ -1,7 +1,6 @@
 from tkinter import *
 from tkinter import messagebox
 
-
 def submit():
     global word
     global betük
@@ -153,6 +152,7 @@ def betü_megjelenítés():
     helyc=-1
     helyr=0
     nem=0
+    megvolt=0
     for a in range(3):
         for i in betük:
             helyc+=1
@@ -160,15 +160,16 @@ def betü_megjelenítés():
                 helyc=0
                 helyr+=1
 
-            if helyr>= maxrow and helyc>=maxcolumn:
+            if helyr>= maxrow and helyc>maxcolumn:
                 break
 
             if input2.get().lower() in volt and nem==0 :
                 messagebox.showinfo(title="Volt már",message="Ez a betű már volt.")
                 nem+=1
+                megvolt+=1
                 break
 
-            elif i.lower()==input2.get().lower() and i!=" ":
+            elif i.lower()==input2.get().lower() and megvolt==0:
                 vonalak[helyr][helyc].config(text=i)
                 volt.append(input2.get().lower())
                 veg+=1
@@ -178,7 +179,7 @@ def betü_megjelenítés():
                     messagebox.showinfo(title="Nyertél!", message="Nyertél!")
                     break
 
-        if helyr >= maxrow and helyc >= maxcolumn:
+        if helyr >= maxrow and helyc > maxcolumn:
             break
 
     if nem==0 and i!=" ":
@@ -196,11 +197,10 @@ karakter=0
 hiba=IntVar()
 veg=0
 max=StringVar()
-volt=[" "]
+volt=[" ", ""]
 all=["ö","ü","ó","q","w","e","r","t","z","u","i","o","p","ő","ú","a","s","d","f","g","h","j","k","l","é","á","ű","í","y","x","c","v","b","n","m","0","1","2","3","4","5","6","7","8","9","&","@","<",">","[","]","{","}","#",",","?",";",".",":","-","*","_","/","'","","+","!","%","=","(",")","$","€",]
 maxrow=""
 maxcolumn=""
-
 
 Label(window, text="Akasztófa", font=("Arial", 40),).pack()
 fel=Label(window, text="Itt add meg a szót:", font=("Arial", 30))
